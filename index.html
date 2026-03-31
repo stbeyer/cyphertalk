@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CypherTalk — The Web3 Security Podcast</title>
+  <meta name="description" content="CypherTalk is a podcast by Oak Security exploring blockchain security, smart contracts, cryptography, and the people building a safer crypto ecosystem." />
+  <link rel="icon" href="logo.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf8f5;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #e8734a;
+      --accent2: #d4526e;
+      --border: #e8e4df;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    nav .brand img { width: 36px; height: 36px; border-radius: 6px; }
+    nav .brand span {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    nav .brand span em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    nav .links { display: flex; gap: 1.5rem; }
+    nav .links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav .links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .hero-logo img {
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    .hero-text h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero-text h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+    .listen-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .listen-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .listen-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .btn-spotify { background: #1DB954; color: #fff; }
+    .btn-apple   { background: #872ec4; color: #fff; }
+    .btn-podbean { background: var(--accent); color: #fff; }
+
+    /* PLAYER */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 2rem;
+    }
+    .section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+    .player-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    /* EPISODES */
+    .episode-list { display: flex; flex-direction: column; gap: 1rem; }
+    .episode {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+    }
+    .ep-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .episode h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .episode p { font-size: 0.9rem; color: var(--muted); }
+
+    /* ABOUT */
+    .about-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+    .about-box p { color: var(--muted); margin-bottom: 0.75rem; }
+    .about-box p:last-child { margin-bottom: 0; }
+    .about-box a { color: var(--accent); text-decoration: none; }
+    .about-box a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 3rem;
+    }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 640px) {
+      .hero { flex-direction: column; padding: 3rem 1.5rem 2rem; gap: 1.5rem; }
+      .hero-logo img { width: 120px; height: 120px; }
+      .hero-text h1 { font-size: 2rem; }
+      nav .links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#">
+    <img src="logo.png" alt="CypherTalk logo" />
+    <span>Cypher<em>Talk</em></span>
+  </a>
+  <div class="links">
+    <a href="#episodes">Episodes</a>
+    <a href="#about">About</a>
+    <a href="https://oaksecurity.io" target="_blank" rel="noopener">Oak Security</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-logo">
+    <img src="logo.png" alt="CypherTalk" />
+  </div>
+  <div class="hero-text">
+    <h1>The Web3<br/><em>Security Podcast</em></h1>
+    <p>In-depth conversations with the builders, researchers, and white hats shaping the security of the decentralised web. By <a href="https://oaksecurity.io" style="color:var(--accent);text-decoration:none;">Oak Security</a>.</p>
+    <div class="listen-buttons">
+      <a class="listen-btn btn-spotify"
+         href="https://open.spotify.com/show/cyphertalk"
+         target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Spotify
+      </a>
+      <a class="listen-btn btn-apple"
+         href="https://podcasts.apple.com/podcast/cyphertalk"
+         target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c2.07 0 3.75 1.68 3.75 3.75 0 1.47-.847 2.745-2.085 3.375.315.93.585 2.04.675 3.375.09 1.245-.3 2.25-.3 2.25H9.96s-.39-1.005-.3-2.25c.09-1.335.36-2.445.675-3.375A3.737 3.737 0 018.25 8.25C8.25 6.18 9.93 4.5 12 4.5z"/></svg>
+        Apple Podcasts
+      </a>
+      <a class="listen-btn btn-podbean"
+         href="https://cyphertalk.podbean.com"
+         target="_blank" rel="noopener">
+        🎙 All Episodes
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="player">
+  <h2>🎧 Listen Now</h2>
+  <div class="player-wrap">
+    <iframe title="CypherTalk" allowtransparency="true" height="315" width="100%"
+      style="border: none; min-width: min(100%, 430px); height:315px;"
+      scrolling="no" data-name="pb-iframe-player"
+      src="https://www.podbean.com/player-v2/?i=xsh4x-14e771e-pbblog-playlist&share=1&download=1&rtl=0&fonts=Arial&skin=1&font-color=auto&logo_link=episode_page&order=episodic&limit=10&filter=all&ss=a713390a017602015775e868a2cf26b0&btn-skin=7&size=315"
+      loading="lazy" allowfullscreen=""></iframe>
+  </div>
+</section>
+
+<section class="section" id="episodes">
+  <h2>🆕 Recent Episodes</h2>
+  <div class="episode-list">
+    <div class="episode">
+      <div class="ep-meta">Mar 2026</div>
+      <h3>The DAO Hack, Security Funding & TheDAO Security Fund — Griff Green</h3>
+      <p>Griff Green shares insights from the historic DAO hack, the evolution of Ethereum security, and new models for funding community-led security efforts including quadratic funding.</p>
+    </div>
+    <div class="episode">
+      <div class="ep-meta">Mar 11, 2026</div>
+      <h3>BlockThreat & Actionable Web3 Security Intelligence — Peter Kacherginsky</h3>
+      <p>Peter Kacherginsky, founder of BlockThreat, discusses attack patterns, operational security, the impact of AI on security practices, and the correlation between market conditions and security incidents.</p>
+    </div>
+    <div class="episode">
+      <div class="ep-meta">Mar 9, 2026</div>
+      <h3>Zero-Knowledge Proofs, Privacy & Security — Jordi Baylina</h3>
+      <p>Jordi Baylina (founder of Zisk) and Stefan Beyer explore zero-knowledge proofs, selective disclosure, privacy-first development, and regulatory challenges in the blockchain space.</p>
+    </div>
+    <div class="episode">
+      <div class="ep-meta">Feb 16, 2026</div>
+      <h3>Operational Security for Distributed Web3 Teams — Jade Doherty</h3>
+      <p>A deep dive into opsec for modern tech organisations: zero-trust architecture, phishing, securing GitHub access, and best practices for distributed teams managing significant on-chain value.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <h2>About CypherTalk</h2>
+  <div class="about-box">
+    <p>CypherTalk is a podcast produced by <a href="https://oaksecurity.io" target="_blank" rel="noopener">Oak Security</a>, one of the leading blockchain security audit firms. We sit down with the researchers, founders, and practitioners who are building a more secure decentralised ecosystem.</p>
+    <p>Topics include smart contract security, cryptography, zero-knowledge proofs, operational security, protocol design, and the evolving threat landscape in Web3.</p>
+    <p>Hosted by <strong>Stefan Beyer</strong>, Founder & Managing Director of Oak Security.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 CypherTalk · Produced by <a href="https://oaksecurity.io" target="_blank" rel="noopener">Oak Security</a></p>
+</footer>
+
+</body>
+</html>
