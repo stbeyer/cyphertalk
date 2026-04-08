@@ -158,23 +158,34 @@
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+    }
+    .team-card .team-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      flex-shrink: 0;
     }
     .team-card .name {
       font-weight: 700;
       font-size: 1rem;
     }
     .team-card .role {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--accent);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
     .team-card .bio {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       color: var(--muted);
       flex: 1;
+      text-align: left;
     }
     .team-card a {
       font-size: 0.85rem;
@@ -313,18 +324,21 @@ No hype. Just signal.</p>
   <h2>Who's Involved</h2>
   <div class="team-grid">
     <div class="team-card">
+      <img class="team-photo" src="team-jade.png" alt="Jade Doherty" />
       <div class="name">Jade Doherty</div>
       <div class="role">Host & Producer</div>
       <div class="bio">Jade is your host and has a background in marketing and interviews, having worked at privacy-focused blockchains in lead marketing roles.</div>
       <a href="https://www.linkedin.com/in/jade-doherty-a12b7977/" target="_blank" rel="noopener">LinkedIn →</a>
     </div>
     <div class="team-card">
+      <img class="team-photo" src="team-stefan.png" alt="Dr. Stefan Beyer" />
       <div class="name">Dr. Stefan Beyer</div>
       <div class="role">Co-host · Security Content Researcher</div>
       <div class="bio">Stefan brings deep expertise in cybersecurity, cryptography, and threat analysis. He is a leader in the sphere of operational security and has researched distributed systems since 2004. He has a particular interest in software vulnerabilities and privacy technology, and what safety looks like in a post-AI world.</div>
       <a href="https://www.linkedin.com/in/st-beyer/" target="_blank" rel="noopener">LinkedIn →</a>
     </div>
     <div class="team-card">
+      <img class="team-photo" src="team-hana.png" alt="Hana Yoosuf" />
       <div class="name">Hana Yoosuf</div>
       <div class="role">Co-host · Privacy Content Researcher</div>
       <div class="bio">Hana has a background in Business Development with a focus on privacy. She has worked at leading dApps, DAOs, and auditing firms as well as founding Women in web3Privacy.</div>
