@@ -246,6 +246,21 @@
       font-size: 0.85rem;
       margin-top: 3rem;
     }
+    footer .license {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    footer .license img {
+      height: 31px;
+      width: auto;
+    }
+    footer .license span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
 
     @media (max-width: 640px) {
       .hero { flex-direction: column; padding: 3rem 1.5rem 2rem; gap: 1.5rem; }
@@ -370,6 +385,12 @@ No hype. Just signal.</p>
 
 <footer>
   <p>© 2026 CypherTalk</p>
+  <div class="license">
+    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
+      <img src="cc-by.png" alt="CC BY 4.0" />
+    </a>
+    <span>All episodes are licensed under CC BY 4.0</span>
+  </div>
 </footer>
 
 </body>
