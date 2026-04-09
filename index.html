@@ -145,6 +145,31 @@
       overflow: hidden;
     }
 
+    /* SOUNDBITES */
+    .soundbites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .soundbite-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .soundbite-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     /* TEAM */
     .team-grid {
       display: grid;
@@ -279,6 +304,7 @@
   </a>
   <div class="links">
     <a href="#player">Listen</a>
+    <a href="#soundbites">Soundbites</a>
     <a href="#team">Team</a>
     <a href="#sponsors">Sponsors</a>
     <a href="#about">About</a>
@@ -332,6 +358,18 @@ No hype. Just signal.</p>
       scrolling="no" data-name="pb-iframe-player"
       src="https://www.podbean.com/player-v2/?i=xsh4x-14e771e-pbblog-playlist&share=1&download=1&rtl=0&fonts=Arial&skin=1&font-color=auto&logo_link=episode_page&order=episodic&limit=10&filter=all&ss=a713390a017602015775e868a2cf26b0&btn-skin=7&size=315"
       loading="lazy" allowfullscreen=""></iframe>
+  </div>
+</section>
+
+<section class="section" id="soundbites">
+  <h2>Soundbites</h2>
+  <div class="soundbites-grid">
+    <div class="soundbite-embed">
+      <iframe src="https://www.youtube.com/embed/ToHS0lo7WXY" title="CypherTalk Soundbite" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="soundbite-embed">
+      <iframe src="https://www.youtube.com/embed/GeWYi7MiuKo" title="CypherTalk Soundbite" allowfullscreen loading="lazy"></iframe>
+    </div>
   </div>
 </section>
 
