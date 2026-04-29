@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support CypherTalk — CypherTalk</title>
+  <meta name="description" content="Support CypherTalk's cybersecurity and privacy podcast through TheDAO Security Fund's quadratic funding round." />
+  <link rel="icon" href="logo.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf8f5;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #e8734a;
+      --accent2: #d4526e;
+      --border: #e8e4df;
+      --radius: 12px;
+      --qf-bg: #1a0a2e;
+      --qf-accent: #7c3aed;
+      --qf-highlight: #fbbf24;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    nav .brand img { width: 36px; height: 36px; border-radius: 6px; }
+    nav .brand span {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    nav .brand span em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    nav .links { display: flex; gap: 1.5rem; }
+    nav .links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav .links a:hover { color: var(--text); }
+    nav .links a.support-link {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    nav .links a.support-link:hover { color: var(--accent2); }
+
+    /* HERO */
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .hero-logo img {
+      width: 160px;
+      height: 160px;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      flex-shrink: 0;
+    }
+    .hero-text h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    .hero-text h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* DONATE CTA */
+    .donate-section {
+      background: var(--qf-bg);
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .donate-section .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--qf-highlight);
+      margin-bottom: 1rem;
+    }
+    .donate-section h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+    .donate-section .sub {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .donate-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 24px rgba(124, 58, 237, 0.4);
+    }
+    .donate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(124, 58, 237, 0.55);
+    }
+    .round-label {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      margin-top: 2rem;
+      color: var(--text);
+    }
+    .content h3:first-child { margin-top: 0; }
+    .content p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .content ul {
+      margin: 0 0 1.5rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .content ul li { margin-bottom: 0.5rem; }
+
+    /* QF EXPLAINER */
+    .qf-explainer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .qf-explainer h3 { margin-top: 0 !important; }
+    .qf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .qf-card {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .qf-card h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--qf-accent);
+      margin-bottom: 0.5rem;
+    }
+    .qf-card p {
+      font-size: 0.875rem !important;
+      margin-bottom: 0 !important;
+      color: var(--muted) !important;
+    }
+
+    /* DAO FUND BOX */
+    .dao-box {
+      background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .dao-box h3 { color: #fff !important; margin-top: 0 !important; }
+    .dao-box p { color: rgba(255,255,255,0.75) !important; }
+
+    /* ELIGIBILITY — prominent warning */
+    .eligibility {
+      background: #fffbeb;
+      border: 2px solid #f59e0b;
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+    .eligibility .label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #b45309;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .eligibility .label .icon {
+      font-size: 1rem;
+    }
+    .eligibility h3 {
+      color: #92400e !important;
+      font-size: 1.1rem !important;
+      margin-bottom: 1rem !important;
+    }
+    .eligibility ul {
+      color: #78350f !important;
+      margin-left: 1.25rem !important;
+    }
+    .eligibility ul li { margin-bottom: 0.6rem; font-size: 0.95rem; font-weight: 500; }
+    .eligibility .note {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba(245, 158, 11, 0.15);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #92400e;
+    }
+
+    /* PROJECT LIST */
+    .project-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+    .project-list h3 { margin-top: 0 !important; }
+    .project-list ul {
+      margin: 0.75rem 0 0 1.5rem !important;
+      color: var(--text) !important;
+    }
+    .project-list ul li { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .project-list .placeholder {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 3rem;
+    }
+    footer .license {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    footer .license img { height: 31px; width: auto; }
+    footer .license span { font-size: 0.8rem; color: var(--muted); }
+
+    @media (max-width: 640px) {
+      .hero { flex-direction: column; padding: 3rem 1.5rem 2rem; gap: 1.5rem; }
+      .hero-logo img { width: 110px; height: 110px; }
+      .hero-text h1 { font-size: 1.8rem; }
+      .qf-grid { grid-template-columns: 1fr; }
+      nav .links { display: none; }
+      .eligibility { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html">
+    <img src="logo.png" alt="CypherTalk logo" />
+    <span>Cypher<em>Talk</em></span>
+  </a>
+  <div class="links">
+    <a href="index.html#player">Listen</a>
+    <a href="index.html#soundbites">Soundbites</a>
+    <a href="index.html#team">Team</a>
+    <a href="index.html#sponsors">Sponsors</a>
+    <a href="index.html#about">About</a>
+    <a href="support.html" class="support-link">Support Us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-logo">
+    <img src="logo.png" alt="CypherTalk" />
+  </div>
+  <div class="hero-text">
+    <h1>Support <em>CypherTalk</em></h1>
+    <p>Help us keep CypherTalk independent and freely available. We are participating in TheDAO Security Fund's quadratic funding round — every donation, small or large, helps.</p>
+  </div>
+</section>
+
+<!-- DONATE CTA -->
+<section class="donate-section">
+  <div class="eyebrow">TheDAO Security Fund — Quadratic Funding Round</div>
+  <h2>Donate to CypherTalk</h2>
+  <p class="sub">Your contribution goes directly to supporting independent security education for the Ethereum ecosystem. Even a small donation can have an outsized impact through matching.</p>
+  <a class="donate-btn" href="https://qf.giveth.io/project/cyphertalk-podcast:-security-education-for-ethereum?roundId=16" target="_blank" rel="noopener">
+    Donate on Giveth
+  </a>
+  <div class="round-label">Quadratic Funding Round · TheDAO Security Fund</div>
+</section>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- ELIGIBILITY — most prominent -->
+  <div class="eligibility">
+    <div class="label"><span class="icon">&#9888;</span> Before You Donate — Eligibility Requirements</div>
+    <h3>To qualify for matching, donors must meet both criteria:</h3>
+    <ul>
+      <li><strong>KYC passport verification required.</strong> All donors must complete identity verification (passport or government-issued ID) on the Giveth platform before their donation can be matched.</li>
+      <li><strong>Donate to more than one project.</strong> Your donations are only eligible for quadratic matching if you contribute to <em>three or more</em> projects in this funding round — not just CypherTalk. Spread your support across several projects you believe in.</li>
+    </ul>
+    <div class="note">
+      <strong>Why the multi-project requirement?</strong> Quadratic funding is designed to fund public goods that serve the broadest community. Donating to multiple projects signals that you value the ecosystem as a whole — which is exactly what TheDAO Security Fund aims to protect.
+    </div>
+  </div>
+
+  <!-- QF EXPLAINER -->
+  <div class="qf-explainer">
+    <h3>What is Quadratic Funding?</h3>
+    <p>Quadratic funding (QF) is a democratic way to allocate matching funds to public goods. It amplifies small donations by matching them more generously than large ones — the more people who give, even tiny amounts, the higher the match.</p>
+    <p>Think of it as crowd-funded matching: a large matching pool is distributed not in proportion to total amount raised, but according to how many individual donors each project attracts. This means <strong>a $10 donation from 100 people can outweigh a single $1,000 donation</strong> — giving the community, not the whales, the deciding vote.</p>
+    <div class="qf-grid">
+      <div class="qf-card">
+        <h4>The math</h4>
+        <p>QF mathematically favours broad support over large gifts. More donors = higher match multiplier, regardless of total amount raised.</p>
+      </div>
+      <div class="qf-card">
+        <h4>Why it matters</h4>
+        <p>It prevents big wallets from dominating funding decisions and lets small contributors have outsized influence in building public goods.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAO SECURITY FUND -->
+  <div class="dao-box">
+    <h3>What is TheDAO Security Fund?</h3>
+    <p>TheDAO Security Fund is a long-term endowment that reactivates over 75,000 ETH in unclaimed assets recovered from the original 2016 DAO hack. Staked ETH generates an estimated ~$8M per year in staking yield, distributed through community-driven rounds to security researchers, tooling developers, and rapid-response teams across the Ethereum ecosystem.</p>
+    <p>Managed by Giveth and curated by leading Ethereum security experts — including Vitalik Buterin, Taylor Monahan (MetaMask), Jordi Baylina (ZisK), and pcaversaccio (SEAL 911) — the fund represents a landmark effort to permanently fund Ethereum security infrastructure through quadratic funding, retroactive grants, and ranked-choice voting.</p>
+  </div>
+
+  <!-- PROJECTS IN THE ROUND -->
+  <div class="project-list">
+    <h3>Projects in This Funding Round</h3>
+    <p>To qualify for matching, donate to at least 3 projects. Here are all the projects in this round:</p>
+
+    <!-- TODO: Replace this placeholder with the actual project list from the QF round -->
+    <div class="placeholder">
+      <strong>Project list coming soon.</strong> Please check back or visit the <a href="https://qf.giveth.io/project/cyphertalk-podcast:-security-education-for-ethereum?roundId=16" target="_blank" rel="noopener" style="color:var(--accent)">Giveth funding page</a> for the full list of projects in this round.
+    </div>
+
+    <!-- Example markup — uncomment and fill in when project list is available:
+    <ul>
+      <li><a href="https://qf.giveth.io/project/..." target="_blank" rel="noopener">Project Name 1</a></li>
+      <li><a href="https://qf.giveth.io/project/..." target="_blank" rel="noopener">Project Name 2</a></li>
+      <li>CypherTalk — Security Education for Ethereum</li>
+      <li><a href="https://qf.giveth.io/project/..." target="_blank" rel="noopener">Project Name N</a></li>
+    </ul>
+    -->
+  </div>
+
+  <!-- HOW YOUR DONATION HELPS -->
+  <h3>What Your Donation Supports</h3>
+  <p>CypherTalk produces free, independent cybersecurity and privacy education for the Ethereum ecosystem and beyond. We cover zero-knowledge proofs, smart contract auditing, operational security, AI-driven threats, and privacy technology — without sponsors, ads, or corporate backing.</p>
+  <p>Donations help cover hosting, editing, transcription, and the time our hosts invest in researching and producing each episode. More importantly, your participation in this round signals that the community values independent security education — which strengthens the case for future funding rounds.</p>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 CypherTalk</p>
+  <div class="license">
+    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
+      <img src="cc-by.png" alt="CC BY 4.0" />
+    </a>
+    <span>All episodes are licensed under CC BY 4.0</span>
+  </div>
+</footer>
+
+</body>
+</html>
