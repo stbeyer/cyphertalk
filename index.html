@@ -1,442 +1,218 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CypherTalk — The Cybersecurity Podcast</title>
-  <meta name="description" content="CypherTalk is a podcast exploring cybersecurity, privacy, zero-knowledge cryptography, operational security, AI, and threat intelligence." />
-  <link rel="icon" href="logo.png" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #faf8f5;
-      --surface: #ffffff;
-      --text: #1a1a1a;
-      --muted: #6b6b6b;
-      --accent: #e8734a;
-      --accent2: #d4526e;
-      --border: #e8e4df;
-      --radius: 12px;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* NAV */
-    nav {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    nav .brand img { width: 36px; height: 36px; border-radius: 6px; }
-    nav .brand span {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    nav .brand span em {
-      font-style: normal;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    nav .links { display: flex; gap: 1.5rem; }
-    nav .links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    nav .links a:hover { color: var(--text); }
-
-    /* HERO */
-    .hero {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 5rem 2rem 3rem;
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-    }
-    .hero-logo img {
-      width: 180px;
-      height: 180px;
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      flex-shrink: 0;
-    }
-    .hero-text h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-    .hero-text h1 em {
-      font-style: normal;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-text p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 500px;
-      margin-bottom: 2rem;
-    }
-    .listen-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .listen-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0.6rem 1.2rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    .listen-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-    .btn-spotify { background: #1DB954; color: #fff; }
-    .btn-apple   { background: #872ec4; color: #fff; }
-    .btn-podbean { background: var(--accent); color: #fff; }
-    .btn-youtube { background: #FF0000; color: #fff; }
-
-    /* SECTIONS */
-    .section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 2rem;
-    }
-    .section h2 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-      color: var(--text);
-    }
-
-    /* PLAYER */
-    .player-wrap {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-
-    /* SOUNDBITES */
-    .soundbites-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    .soundbite-embed {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--surface);
-      border: 1px solid var(--border);
-    }
-    .soundbite-embed iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* TEAM */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-    }
-    .team-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 0.75rem;
-    }
-    .team-card .team-photo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--border);
-      flex-shrink: 0;
-    }
-    .team-card .name {
-      font-weight: 700;
-      font-size: 1rem;
-    }
-    .team-card .role {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .team-card .bio {
-      font-size: 0.875rem;
-      color: var(--muted);
-      flex: 1;
-      text-align: left;
-    }
-    .team-card a {
-      font-size: 0.85rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-top: 0.25rem;
-    }
-    .team-card a:hover { text-decoration: underline; }
-
-    /* SPONSORS */
-    .sponsors-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      text-align: center;
-    }
-    .sponsors-box p {
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-    .sponsor-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      padding: 0.75rem 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: box-shadow 0.2s;
-    }
-    .sponsor-logo:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    .sponsor-logo img { height: 32px; width: auto; }
-    .sponsor-logo span {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .sponsors-box .funding-note {
-      margin-top: 1.5rem;
-      margin-bottom: 0;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .sponsors-box .funding-note a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .sponsors-box .funding-note a:hover { text-decoration: underline; }
-
-    /* ABOUT */
-    .about-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-    }
-    .about-box p { color: var(--muted); margin-bottom: 0.75rem; font-size: 0.95rem; }
-    .about-box p:last-child { margin-bottom: 0; }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 2rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-top: 3rem;
-    }
-    footer .license {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-    }
-    footer .license img {
-      height: 31px;
-      width: auto;
-    }
-    footer .license span {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    @media (max-width: 640px) {
-      .hero { flex-direction: column; padding: 3rem 1.5rem 2rem; gap: 1.5rem; }
-      .hero-logo img { width: 120px; height: 120px; }
-      .hero-text h1 { font-size: 2rem; }
-      nav .links { display: none; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="CypherTalk is an independent podcast about cybersecurity, digital privacy, AI security and AI safety, hosted by Jade Doherty and Dr. Stefan Beyer.">
+  <title>CypherTalk | Cybersecurity, Privacy &amp; AI</title>
+  <link rel="icon" href="brand/privacy-lock.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="media.js" defer></script>
 </head>
-<body>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<nav>
-  <a class="brand" href="#">
-    <img src="logo.png" alt="CypherTalk logo" />
-    <span>Cypher<em>Talk</em></span>
-  </a>
-  <div class="links">
-    <a href="#player">Listen</a>
-    <a href="#soundbites">Soundbites</a>
-    <a href="#team">Team</a>
-    <a href="#sponsors">Sponsors</a>
-    <a href="#about">About</a>
-    <a href="https://www.youtube.com/@CypherTalkTV" target="_blank" rel="noopener">YouTube</a>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="hero-logo">
-    <img src="logo.png" alt="CypherTalk" />
-  </div>
-  <div class="hero-text">
-    <h1><em>Cybersecurity</em><br/>& Privacy Podcast</h1>
-    <p>CypherTalk is a twice-monthly podcast hosted by Jade Doherty and Dr. Stefan Beyer, Managing Partner at Oak Security, for people who want to understand how security actually works and how to keep themselves and their projects secure.
-We talk to the researchers finding vulnerabilities before attackers do, the cryptographers building systems that protect millions of people, and the practitioners navigating the gap between security principles and operational reality. Zero-knowledge proofs, smart contract audits, AI-driven threat intelligence, operational security, privacy technology — covered by people who work on these problems every day.
-For security professionals and anyone who's ever wondered what's really happening beneath the surface of the systems they depend on.
-No hype. Just signal.</p>
-    <div class="listen-buttons">
-      <a class="listen-btn btn-spotify"
-         href="https://open.spotify.com/show/3VZ6HGeIgf2EJfjl2EaO2B"
-         target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        Spotify
-      </a>
-      <a class="listen-btn btn-apple"
-         href="https://podcasts.apple.com/us/podcast/cyphertalk/id1874536913"
-         target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c2.07 0 3.75 1.68 3.75 3.75 0 1.47-.847 2.745-2.085 3.375.315.93.585 2.04.675 3.375.09 1.245-.3 2.25-.3 2.25H9.96s-.39-1.005-.3-2.25c.09-1.335.36-2.445.675-3.375A3.737 3.737 0 018.25 8.25C8.25 6.18 9.93 4.5 12 4.5z"/></svg>
-        Apple Podcasts
-      </a>
-      <a class="listen-btn btn-podbean"
-         href="https://cyphertalk.podbean.com"
-         target="_blank" rel="noopener">
-        🎙 All Episodes
-      </a>
-      <a class="listen-btn btn-youtube"
-         href="https://www.youtube.com/@CypherTalkTV"
-         target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube
-      </a>
+  <header class="masthead">
+    <div class="menu-band">
+      <div class="shell menu-inner">
+        <a class="brand" href="#top" aria-label="CypherTalk home">
+          <img src="logo.png" alt="CypherTalk" width="1741" height="1741">
+        </a>
+        <nav aria-label="On this page">
+          <a href="#about">Topics</a>
+          <a href="#player">Episodes</a>
+          <a href="#soundbites">Soundbites</a>
+          <a href="#team">Hosts</a>
+          <a href="#sponsors">Sponsors</a>
+        </nav>
+      </div>
     </div>
-  </div>
-</section>
-
-<section class="section" id="player">
-  <h2>Listen Now</h2>
-  <div class="player-wrap">
-    <iframe title="CypherTalk" allowtransparency="true" height="315" width="100%"
-      style="border: none; min-width: min(100%, 430px); height:315px;"
-      scrolling="no" data-name="pb-iframe-player"
-      src="https://www.podbean.com/player-v2/?i=xsh4x-14e771e-pbblog-playlist&share=1&download=1&rtl=0&fonts=Arial&skin=1&font-color=auto&logo_link=episode_page&order=episodic&limit=10&filter=all&ss=a713390a017602015775e868a2cf26b0&btn-skin=7&size=315"
-      loading="lazy" allowfullscreen=""></iframe>
-  </div>
-</section>
-
-<section class="section" id="soundbites">
-  <h2>Soundbites</h2>
-  <div class="soundbites-grid">
-    <div class="soundbite-embed">
-      <iframe src="https://www.youtube.com/embed/ToHS0lo7WXY" title="CypherTalk Soundbite" allowfullscreen loading="lazy"></iframe>
+    <div class="hero shell">
+      <div class="hero-copy">
+        <p class="kicker">Independent podcast</p>
+        <h1>Security, privacy<br><em>and the age of AI.</em></h1>
+        <p class="hero-description">Jade Doherty and Dr. Stefan Beyer ask researchers how we protect our data, secure AI systems, and decide when those systems are safe to use.</p>
+        <a class="button button-primary" href="#player"><span class="play-mark" aria-hidden="true"></span> Explore episodes</a>
+        <nav class="platforms" aria-label="Podcast platforms">
+          <a href="https://open.spotify.com/show/3VZ6HGeIgf2EJfjl2EaO2B">Spotify</a>
+          <a href="https://podcasts.apple.com/us/podcast/cyphertalk/id1874536913">Apple Podcasts</a>
+          <a href="https://www.youtube.com/@CypherTalkTV">YouTube</a>
+        </nav>
+      </div>
+      <div class="cover-art">
+        <img src="logo.png" width="1741" height="1741" alt="CypherTalk — two people in conversation around a privacy lock" fetchpriority="high">
+      </div>
     </div>
-    <div class="soundbite-embed">
-      <iframe src="https://www.youtube.com/embed/GeWYi7MiuKo" title="CypherTalk Soundbite" allowfullscreen loading="lazy"></iframe>
-    </div>
-  </div>
-</section>
+  </header>
 
-<section class="section" id="team">
-  <h2>Who's Involved</h2>
-  <div class="team-grid">
-    <div class="team-card">
-      <img class="team-photo" src="team-jade.png" alt="Jade Doherty" />
-      <div class="name">Jade Doherty</div>
-      <div class="role">Host & Producer</div>
-      <div class="bio">Jade is your host and has a background in marketing and interviews, having worked at privacy-focused blockchains in lead marketing roles.</div>
-      <a href="https://www.linkedin.com/in/jade-doherty-a12b7977/" target="_blank" rel="noopener">LinkedIn →</a>
-    </div>
-    <div class="team-card">
-      <img class="team-photo" src="team-hana.png" alt="Dr. Stefan Beyer" />
-      <div class="name">Dr. Stefan Beyer</div>
-      <div class="role">Co-host · Security Content Researcher</div>
-      <div class="bio">Stefan brings deep expertise in cybersecurity, cryptography, and threat analysis. He is a leader in the sphere of operational security and has researched distributed systems since 2004. He has a particular interest in software vulnerabilities and privacy technology, and what safety looks like in a post-AI world.</div>
-      <a href="https://www.linkedin.com/in/st-beyer/" target="_blank" rel="noopener">LinkedIn →</a>
-    </div>
-  </div>
-</section>
+  <main id="main">
+    <section class="topics band" id="about" aria-labelledby="topics-title">
+      <div class="shell">
+        <div class="section-heading">
+          <h2 id="topics-title">What we cover</h2>
+          <p>Conversations for security professionals, developers, and anyone curious about the systems they rely on.</p>
+        </div>
+        <div class="topics-grid">
+          <article class="topic">
+            <h3>Cybersecurity</h3>
+            <p>How breaches happen, what incident responders learn, and how teams can improve their day-to-day security.</p>
+          </article>
+          <article class="topic">
+            <h3>Privacy</h3>
+            <p>Tracking, surveillance, and the tools and cryptography that give people more control over their data.</p>
+          </article>
+          <article class="topic">
+            <h3>AI security</h3>
+            <p>How to protect models, agents, and the systems they can access, and how defenders use AI in their own work.</p>
+          </article>
+          <article class="topic">
+            <h3>AI safety</h3>
+            <p>How we evaluate increasingly capable models, where human oversight matters, and what risks remain before and after deployment.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section class="section" id="sponsors">
-  <h2>Sponsors</h2>
-  <div class="sponsors-box">
-    <p>CypherTalk is proudly supported by</p>
-    <a class="sponsor-logo" href="https://oaksecurity.io" target="_blank" rel="noopener">
-      <img src="oak-security-logo.png" alt="Oak Security" onerror="this.style.display='none'" />
-      <span>Oak Security</span>
+    <section class="episodes shell section-space" id="player" aria-labelledby="episodes-title">
+      <div class="section-heading">
+        <h2 id="episodes-title">Start listening</h2>
+        <a class="text-link" href="https://cyphertalk.podbean.com/">View the full archive</a>
+      </div>
+      <div class="episode-grid">
+        <article class="episode">
+          <p class="kicker">Cybersecurity</p>
+          <h3><a href="https://cyphertalk.podbean.com/e/security-and-privacy-in-2026/">Security and Privacy in 2026</a></h3>
+          <p>Jade and Stefan open the series with phishing, supply-chain risk, and how teams can limit the damage when something goes wrong.</p>
+        </article>
+        <article class="episode">
+          <p class="kicker">Privacy</p>
+          <h3><a href="https://cyphertalk.podbean.com/e/the-brave-browser-with-kyle-den-hartog/">The Brave Browser with Kyle Den Hartog</a></h3>
+          <p>A conversation about online tracking, what browsers can protect, and why privacy defaults matter.</p>
+        </article>
+        <article class="episode">
+          <p class="kicker">AI &amp; cybersecurity</p>
+          <h3><a href="https://cyphertalk.podbean.com/e/justus-hanna-on-ai-bug-hunting/">Justus Hanna on AI Bug Hunting</a></h3>
+          <p>How researchers use AI to find software vulnerabilities, and where human judgment still matters.</p>
+        </article>
+      </div>
+      <div class="media-panel playlist" data-media>
+        <div class="media-intro">
+          <h3>Podcast player</h3>
+          <p>Loading the player connects to Podbean.</p>
+          <noscript><a class="text-link" href="https://cyphertalk.podbean.com/">Listen on Podbean</a></noscript>
+        </div>
+        <button class="button button-secondary" type="button" data-load-media hidden><span class="play-mark" aria-hidden="true"></span> Load podcast player</button>
+        <template>
+          <iframe class="podbean-player" title="CypherTalk podcast player" allowfullscreen
+            src="https://www.podbean.com/player-v2/?i=xsh4x-14e771e-pbblog-playlist&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Arial&amp;skin=1&amp;font-color=auto&amp;logo_link=episode_page&amp;order=episodic&amp;limit=10&amp;filter=all&amp;ss=a713390a017602015775e868a2cf26b0&amp;btn-skin=7&amp;size=315"></iframe>
+        </template>
+      </div>
+    </section>
+
+    <section class="band section-space" id="soundbites" aria-labelledby="clips-title">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <h2 id="clips-title">Soundbites</h2>
+            <p>Short clips from the show. Loading a clip connects to YouTube.</p>
+          </div>
+          <a class="text-link" href="https://www.youtube.com/@CypherTalkTV">Visit the YouTube channel</a>
+        </div>
+        <div class="clips-grid">
+          <article class="media-panel clip" data-media>
+            <p class="kicker">Privacy</p>
+            <h3>Balancing Privacy and Security</h3>
+            <div class="clip-actions">
+              <button class="button button-secondary" type="button" data-load-media hidden aria-label="Load video: Balancing Privacy and Security"><span class="play-mark" aria-hidden="true"></span> Load video</button>
+              <a class="text-link" href="https://www.youtube.com/watch?v=ToHS0lo7WXY" aria-label="Watch Balancing Privacy and Security on YouTube">Watch on YouTube</a>
+            </div>
+            <template>
+              <iframe class="video-player" title="Balancing Privacy and Security" src="https://www.youtube-nocookie.com/embed/ToHS0lo7WXY"
+                allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            </template>
+          </article>
+          <article class="media-panel clip" data-media>
+            <p class="kicker">AI &amp; cybersecurity</p>
+            <h3>AI’s Impact on Cybersecurity – A Double-Edged Sword</h3>
+            <div class="clip-actions">
+              <button class="button button-secondary" type="button" data-load-media hidden aria-label="Load video: AI’s Impact on Cybersecurity – A Double-Edged Sword"><span class="play-mark" aria-hidden="true"></span> Load video</button>
+              <a class="text-link" href="https://www.youtube.com/watch?v=Bvi3NHQGsnQ" aria-label="Watch AI’s Impact on Cybersecurity – A Double-Edged Sword on YouTube">Watch on YouTube</a>
+            </div>
+            <template>
+              <iframe class="video-player" title="AI’s Impact on Cybersecurity – A Double-Edged Sword" src="https://www.youtube-nocookie.com/embed/Bvi3NHQGsnQ"
+                allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            </template>
+          </article>
+          <article class="media-panel clip" data-media>
+            <p class="kicker">Security research</p>
+            <h3>Disclosure Without Bug Bounties</h3>
+            <div class="clip-actions">
+              <button class="button button-secondary" type="button" data-load-media hidden aria-label="Load video: Disclosure Without Bug Bounties"><span class="play-mark" aria-hidden="true"></span> Load video</button>
+              <a class="text-link" href="https://www.youtube.com/watch?v=Br9rRlD_UV0" aria-label="Watch Disclosure Without Bug Bounties on YouTube">Watch on YouTube</a>
+            </div>
+            <template>
+              <iframe class="video-player" title="Disclosure Without Bug Bounties" src="https://www.youtube-nocookie.com/embed/Br9rRlD_UV0"
+                allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            </template>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell section-space" id="team" aria-labelledby="hosts-title">
+      <div class="section-heading">
+        <h2 id="hosts-title">Meet the hosts</h2>
+      </div>
+      <div class="hosts-grid">
+        <article class="host">
+          <img src="team-jade.png" alt="" width="500" height="500" loading="lazy">
+          <div>
+            <p class="kicker">Host &amp; producer</p>
+            <h3>Jade Doherty</h3>
+            <p>Jade brings a background in interviews and communications for privacy-focused technology. She guides conversations about what security and privacy decisions mean in practice.</p>
+            <a class="text-link" href="https://www.linkedin.com/in/jade-doherty-a12b7977/" aria-label="Jade Doherty on LinkedIn">LinkedIn</a>
+          </div>
+        </article>
+        <article class="host">
+          <img src="team-stefan.png" alt="" width="500" height="500" loading="lazy">
+          <div>
+            <p class="kicker">Co-host</p>
+            <h3>Dr. Stefan Beyer</h3>
+            <p>Stefan is a security researcher and co-founder of Oak Security. His work spans software vulnerabilities, cryptography, and the security of AI systems.</p>
+            <a class="text-link" href="https://www.linkedin.com/in/st-beyer/" aria-label="Stefan Beyer on LinkedIn">LinkedIn</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="band section-space" id="sponsors" aria-labelledby="sponsors-title">
+      <div class="shell">
+        <div class="section-heading"><h2 id="sponsors-title">Sponsors</h2></div>
+        <div class="sponsor-grid">
+          <a class="sponsor" href="https://oaksecurity.io">
+            <img src="oak-security-logo.png" alt="" width="300" height="188" loading="lazy">
+            <span>Oak Security</span>
+          </a>
+          <a class="sponsor" href="https://mhl42.ai/">
+            <img src="sponsors/mostly-harmless.svg" alt="" width="240" height="240" loading="lazy">
+            <span>Mostly Harmless</span>
+          </a>
+          <a class="sponsor" href="https://thedao.fund/">
+            <img src="sponsors/thedao-security-fund.svg" alt="" width="264" height="264" loading="lazy">
+            <span>TheDAO Security Fund</span>
+          </a>
+        </div>
+        <p class="funding-credit">CypherTalk received funding through <a class="text-link" href="https://qf.giveth.io/qf/ethereum-security">TheDAO Security Fund’s first quadratic funding round</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <a class="brand" href="#top" aria-label="CypherTalk home">
+      <img src="logo.png" alt="CypherTalk" width="1741" height="1741">
     </a>
-    <p class="funding-note">CypherTalk has received funding from TheDAO Security Fund's 1st Quadratic Funding round. <a href="https://qf.giveth.io/qf/ethereum-security" target="_blank" rel="noopener">Learn about the programme →</a></p>
-  </div>
-</section>
-
-<section class="section" id="about">
-  <h2>About CypherTalk</h2>
-  <div class="about-box">
-    <p>CypherTalk is an independent podcast dedicated to cybersecurity, privacy, and the human side of staying safe in a digital world. We sit down with researchers, practitioners, and experts exploring a broad range of topics: operational security, zero-knowledge cryptography, artificial intelligence in both attacks and defences, threat intelligence, privacy technology, and the evolving regulatory and ethical landscape of data protection.</p>
-    <p>Our guests come from across the security spectrum, including offensive researchers, privacy engineers, threat intelligence analysts, policy experts, and educators. What unites them is a commitment to making complex security topics accessible and actionable.</p>
-    <p>CypherTalk is educational content first. Whether you're a security professional, a developer, or someone who just wants to understand the threats shaping our digital lives.</p>
-    <p>New episodes drop regularly. Subscribe wherever you get your podcasts.</p>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 CypherTalk</p>
-  <div class="license">
-    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
-      <img src="cc-by.png" alt="CC BY 4.0" />
-    </a>
-    <span>All episodes are licensed under CC BY 4.0</span>
-  </div>
-</footer>
-
+    <p>© 2026 CypherTalk. Episodes licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+  </footer>
 </body>
 </html>
