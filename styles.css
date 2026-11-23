@@ -114,9 +114,10 @@ section[id] { scroll-margin-top: 1rem; }
   justify-self: center;
 }
 
-.platforms { gap: 0.5rem 1.1rem; margin-top: 1.1rem; }
-.platforms a { color: var(--accent); font-size: 0.92rem; text-underline-offset: 0.25em; }
-
+.platforms { gap: 0.5rem clamp(0.875rem, 2vw, 1.5rem); margin-top: 1.1rem; }
+.platforms a { display: inline-flex; align-items: center; min-height: 48px; border-radius: 4px; }
+.platforms a:hover { outline: 1px solid var(--accent); outline-offset: 5px; }
+.platforms img { width: auto; }
 
 .kicker {
   display: flex;
