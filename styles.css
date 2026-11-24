@@ -228,11 +228,14 @@ h3 {
 .topic::before {
   content: "";
   position: absolute;
-  inset: -1px auto auto 0;
-  width: 2.5rem;
+  inset: -1px 0 auto;
   height: 3px;
-  background: var(--accent);
+  background: linear-gradient(var(--accent), var(--accent)) left / 2.5rem 100% no-repeat;
 }
+
+.topic:nth-child(2)::before { background-position-x: 33.333%; }
+.topic:nth-child(3)::before { background-position-x: 66.667%; }
+.topic:nth-child(4)::before { background-position-x: 100%; }
 
 .topic p, .episode p:not(.kicker), .media-panel p, .host p:not(.kicker) {
   margin-top: 0.65rem;
@@ -294,17 +297,19 @@ h3 {
 .clips-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 1rem;
-  align-items: start;
 }
 
 .clip, .host { min-width: 0; }
+.clip { display: flex; flex-direction: column; }
 .clip .kicker { margin: 0 0 0.65rem; color: var(--accent); }
 @media (max-width: 60rem) {
   .clips-grid { grid-template-columns: minmax(0, 1fr); }
+  .clips-grid:has(.video-player) { grid-auto-rows: auto; }
 }
-.clip-actions, .video-player { margin-top: 0.9rem; }
-.video-player { aspect-ratio: 16 / 9; }
+.clip-actions { margin-top: auto; padding-top: 0.9rem; }
+.video-player { margin-top: 0.9rem; aspect-ratio: 16 / 9; }
 
 .host {
   display: grid;
@@ -324,6 +329,9 @@ h3 {
 
 .host h3 { margin-top: 0.35rem; }
 .host .text-link { display: inline-block; margin-top: 0.7rem; }
+
+.sponsor-download { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; }
+.sponsor-download small { color: var(--body); }
 
 .sponsor-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
